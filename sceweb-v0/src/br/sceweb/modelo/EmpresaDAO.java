@@ -19,8 +19,8 @@ public class EmpresaDAO {
 		PreparedStatement ps;
 		int codigoRetorno = 0;
 
-		try{
-			Connection conn = new FabricaDeConexoes().getConnection();
+		try(Connection conn = new FabricaDeConexoes().getConnection()){
+			
 			ps = conn.prepareStatement(
 					"insert into empresa (cnpj, nomeDaEmpresa, nomeFantasia, endereco, telefone) values (?,?,?,?,?)");
 			ps.setString(1, empresa.getCnpj());

@@ -13,7 +13,6 @@ public class UC01CadastrarEmpresa {
 
 	static EmpresaDAO empresaDAO;
 	static Empresa empresa;
-	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		empresaDAO = new EmpresaDAO();
@@ -21,19 +20,17 @@ public class UC01CadastrarEmpresa {
 		String test = "60723061055868";
 		
 		empresa.setCnpj(test);
-		empresa.setEndereco("wta");
-		empresa.setNomeDaEmpresa("what");
-		empresa.setNomeFantasia("what");
-		empresa.setTelefone("what");
-		
-		//empresaDAO.adiciona(empresa);
+		empresa.setEndereco(test);
+		empresa.setNomeDaEmpresa(test);
+		empresa.setNomeFantasia(test);
+		empresa.setTelefone(test);
 	}
 
 	@Test
 	public void CT01UC01Cadastro_Valido() {
-		assertEquals(0, empresaDAO.adiciona(empresa));
+		assertEquals(1, empresaDAO.exclui(empresa.getCnpj()));
+		assertEquals(1, empresaDAO.adiciona(empresa));
 	}
-//		assertEquals(1, empresaDAO.exclui(empresa.getCnpj()));
 	
 	@Test
 	public void CT02UC01Cadastro_CNPJ_Invalido() {
@@ -173,15 +170,7 @@ public class UC01CadastrarEmpresa {
 			assertEquals("nome da empresa inválido!", e.getMessage());
 		}
 	}
-	@Test
-	public void CT17UC01Cadastro_Nome_Invalido() {
-		EmpresaDAO emp2 = empresaDAO;
-		try{
-			emp2.adiciona(empresa);
-		}catch(Exception ex){
-			assertEquals("60723061055868", ex.getMessage());			
-		}
-	}
+	//12998878912347
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}

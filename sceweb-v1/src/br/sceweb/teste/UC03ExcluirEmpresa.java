@@ -2,18 +2,15 @@ package br.sceweb.teste;
 
 import static org.junit.Assert.*;
 
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import br.sceweb.modelo.Empresa;
 import br.sceweb.modelo.EmpresaDAO;
 
-public class UC02ConsultarEmpresa {
-
+public class UC03ExcluirEmpresa {
 	static EmpresaDAO empresaDAO;
 	static Empresa empresa;
-	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		empresaDAO = new EmpresaDAO();
@@ -26,12 +23,15 @@ public class UC02ConsultarEmpresa {
 		empresa.setNomeFantasia("what");
 		empresa.setTelefone("what");
 		
-		//empresaDAO.adiciona(empresa);
 	}
 
 	@Test
-	public void CT01UC01Consulta_Valido() {
-		assertEquals(empresa, empresaDAO.consultaEmpresas().indexOf(0));
+	public void CT01UC01Excluir_Valido() {
+		assertEquals(0, empresaDAO.exclui(empresa.getCnpj()));
 	}
 
+	@Test
+	public void CT02UC01Excluir_Invalido() {
+		assertEquals(0, empresaDAO.exclui("'1234'"));
+	}
 }
